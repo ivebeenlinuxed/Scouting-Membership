@@ -7,8 +7,8 @@ function __autoload($load) {
 	$e = explode("\\", $load);
 	$class = array_pop($e);
 	foreach ($e as $key=>$data)
-		$e[$key] = strtolower($data);
-	
+	$e[$key] = strtolower($data);
+
 	if ($e[0] == "system") {
 		$e = array_slice($e, 1);
 		if (file_exists($loc = BOILER_LOCATION."system/".implode("/", $e)."/$class.php")) {
@@ -20,20 +20,20 @@ function __autoload($load) {
 			include $loc;
 			return;
 		}
-		
+
 		if (file_exists($loc = BOILER_LOCATION."system/".implode("/", $e)."/$class.php")) {
 			include $loc;
 			return;
 		}
 	}
-	
+
 }
 
 
 if (isset($_SERVER['_']))
-	$call = Core\Router::getController(array_slice($_SERVER['argv'], 1));
+$call = Core\Router::getController(array_slice($_SERVER['argv'], 1));
 else
-	$call = Core\Router::getController(explode("/", substr($_SERVER['REQUEST_URI'], 1)));
-	
+$call = Core\Router::getController(explode("/", substr($_SERVER['REQUEST_URI'], 1)));
+
 $obj = new $call[0];
 call_user_func_array(array($obj, $call[1]), $call[2]);

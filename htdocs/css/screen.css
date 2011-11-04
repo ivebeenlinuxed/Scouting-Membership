@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+#widget_site_search {
+	display: block;
+	width: 300px;
+}
+
+#site_search {
+	width: 300px;
+}
+
+#site_search_holder {
+	width: 300px;
+	float: right;
+	margin: 20px 20px 0 0;
+}
+
+#site_search_autocomplete {
+	list-style: none;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	display: block;
+	z-index: 10000;
+	width: 300px;
+	border-radius: 0 0 5px 5px;
+	background-color: #ddd;
+	border: 1px solid #555;
+	display: none;
+}
+
+#site_search_autocomplete li {
+	display: block;
+	clear: both;
+}
+
+#site_search_autocomplete li img {
+	float: left;
+}
+
+#site_search_autocomplete li h2 {
+	margin: 10px 0 10px 0;
+	font-size: 15px;
+}
+
+
+.dojoxGrid table {
+	margin: 0;
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
+#borderContainer {
+	width: 100%;
+	height: 100%;
+}
+
+.person_achievement_actions {
+	text-align: right;
+}
+
+.member_details_table {
+	width: 100%;
+}

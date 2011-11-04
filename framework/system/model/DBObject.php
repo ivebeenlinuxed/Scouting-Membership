@@ -1,5 +1,7 @@
 <?php
-namespace Model;
+namespace System\Model;
+use Library\Database\DBException;
+
 /**
  * DBObject.php
  *
@@ -11,7 +13,6 @@ namespace Model;
  * @since Sat 24 Jul 2010 23:46:26 
  */
 
-
 /**
  * DBObject
  *
@@ -19,7 +20,7 @@ namespace Model;
  * 
  * @abstract
  */
-abstract class DBObject implements LinqObject {
+abstract class DBObject implements \Library\Database\LinqObject {
 /**
  * @var int
  */
@@ -104,7 +105,7 @@ abstract class DBObject implements LinqObject {
 			foreach ($s[0] as $Key=>$Data)
 				$this->$Key = $Data;
 		} else {
-			throw new DBException("No object with ID '$Id'");
+			throw new \Library\Database\DBException("No object with ID '$Id'");
 		}
 	}
 
@@ -214,7 +215,7 @@ abstract class DBObject implements LinqObject {
 		
 		foreach ($p as $Key) {
 			if (!isset($id[$Key])) {
-				throw new DBException("Required key component '$Key' missing.");
+				throw new \Library\Database\DBException("Required key component '$Key' missing.");
 			}
 			$and->eq($Key, $id[$Key]);
 		}
