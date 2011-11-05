@@ -28,6 +28,8 @@ abstract class Router {
 	 */
 	protected static $fofHandler = array("Controller\\ErrorDocument", "index");
 	
+	protected static $inputArgs = array();
+	
 	/**
 	 * 
 	 * Get correct controller, using the argument array
@@ -42,18 +44,29 @@ abstract class Router {
 			if (class_exists($c = "Controller\\".implode("\\", array_slice($controllerArray, 0, $i)), true)) {
 				$cOK = $c;
 				if (isset($controllerArray[$i]) && is_callable(array($c, $f = $controllerArray[$i]))) {
-					return array($c, $f, array_slice($controllerArray, $i+1));
+					self::$inputArgs = array_slice($controllerArray, $i+1);
+					return array($c, $f, self::$inputArgs);
 				}
 				$cArgs = array_slice($controllerArray, $i);
 			}
 			$controllerArray[$i-1] = strtolower($controllerArray[$i-1]);
 		}
 		if (isset($cOK) && is_callable(array($cOK, static::$defaultFunction))) {
+			self::$inputArgs = $cArgs;
 			return array($cOK, static::$defaultFunction, $cArgs);
 		} else {
+			self::$inputArgs = $controllerArray;
 			return array("Controller\\".static::$defaultController, static::$defaultFunction, $controllerArray);
 		}
 		return self::$fofHandler;
+	}
+	
+	public static function getArgumentArray() {
+		return self::$inputArgs;
+	}
+	
+	public static function getArgument($i) {
+		return isset(self::$inputArgs[$i])? self::$inputArgs[$i] : false;
 	}
 	
 	public static function getErrorPage($error) {

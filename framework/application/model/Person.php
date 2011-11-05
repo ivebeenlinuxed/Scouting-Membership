@@ -6,6 +6,12 @@ class Person extends DBObject {
 	public static function getPrimaryKey() {return "id";}
 	
 	public function getAchievements() {
+		return PersonAchievement::getByPerson($this);
+	}
+	
+	public function awardAchievement(Achievement $a, $user=false, $date=false, $value=false, $comment="") {
 		
+		
+		PersonAchievement::Award($this, $a, $user, $date, $value, $comment);
 	}
 }

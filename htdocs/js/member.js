@@ -43,12 +43,13 @@ dojo.addOnLoad(function() {
 	});
 });
 
-Member = new Object();
+Member = {};
 Member.loadMain = function(id) {
 	Member.memberAchievementStore = new dojox.data.JsonRestStore( {
 		target : "/API/members/"+id+"/achievements",
 		idAttribute : "id"
 	});
+	Member.activeMember = id;
 	$.ajax( {
 		url : "/ajax/person/details/" + id,
 		success : function(data) {
@@ -109,3 +110,50 @@ Member.setAttribute = function(field, value) {
 	Member._timeout = setTimeout("storeMembers.save(); Member._timeout = null;", 5000);
 };
 
+Member.addAchievementDialog = function() {
+	$.ajax( {
+		url : "/ajax/person/addAchievementDlg",
+		success: function(data) {
+			if (Member.achievementDlg != null) {
+				Member.achievementDlg.destroyDescendants();
+				Member.achievementDlg.destroy();
+			}
+			Member.achievementDlg = new dijit.Dialog({
+		         title: "Add Achievement",
+		         style: "width: 300px"
+		     });
+			Member.achievementDlg.attr("content", data);
+			Member.achievementDlg.show();
+			Member.achievementDlg.intermediateChanges = true;
+			dojo.connect(dijit.byId("add_achievement_select"), "onChange", null, function(e) {
+				if (dijit.byId("add_achievement_select").item.type == 2) {
+					$("#member_add_achievement_value").css("display", "table-row");
+				} else {
+					$("#member_add_achievement_value").css("display", "none");
+					
+				}
+			});
+			
+		}
+	});
+};
+
+Member.addAchievement = function() {
+	$.ajax( {
+		url : "/ajax/person/addAchievement",
+		type: "POST",
+		data: "achievement="+encodeURIComponent(dijit.byId("add_achievement_select").value)+"&value="+encodeURIComponent(dijit.byId("add_achievement_value").value)+"&date="+encodeURIComponent(dijit.byId("add_achievement_date").value)+"&person="+encodeURIComponent(Member.activeMember)+"&comment="+encodeURIComponent(dijit.byId("add_achievement_comment").value),
+		success: function(data) {
+			Member.achievementDlg.hide();
+			Member.memberAchievementStore.revert();
+		}
+	});
+};
+
+Member.removeAchievement = function() {
+	selection = membersAchievements.selection.getSelected();
+	if (selection.length > 0) {
+		Member.memberAchievementStore.deleteItem(selection[0]);
+	}
+	Member.memberAchievementStore.save();
+};

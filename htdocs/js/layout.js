@@ -11,7 +11,8 @@ dojo.require("dijit.layout.LayoutContainer");
 dojo.require("dijit.form.TextBox");
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.data.JsonRestStore");
-
+dojo.require("dijit.form.FilteringSelect");
+dojo.require("dijit.form.DateTextBox");
 dojo.require('dojo.parser');
 
 ajaxDigitPanel = function(id, data) {

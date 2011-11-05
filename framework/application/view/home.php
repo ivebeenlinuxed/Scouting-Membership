@@ -19,6 +19,7 @@ body,html {
 <script type="text/javascript" src="js/layout.js"></script>
 <script type="text/javascript" src="js/group.js"></script>
 <script type="text/javascript" src="js/member.js"></script>
+<script type="text/javascript" src="js/achievement.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/claro/claro.css" />
 <style type="text/css">
