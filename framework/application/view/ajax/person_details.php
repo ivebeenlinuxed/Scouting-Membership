@@ -140,10 +140,13 @@
 		<thead>
 			<tr>
 				<th field="fieldName" width="300px">Group Name</th>
-				<th field="fieldName" width="auto">Description</th>
+				<th field="fieldName" width="auto">Position</th>
 			</tr>
 		</thead>
 	</table>
+	</div>
+	<div dojoType="dijit.layout.ContentPane" title="Events"
+	id="personEventsTab">
 	</div>
 <div dojoType="dijit.layout.ContentPane" title="Emergency Contact"
 	id="personEmergencyTab">

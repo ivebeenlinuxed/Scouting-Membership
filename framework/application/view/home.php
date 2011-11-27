@@ -67,6 +67,8 @@ body,html {
 <div data-dojo-type="dijit.PopupMenuBarItem"><span> Group </span>
 <div data-dojo-type="dijit.Menu" id="groupMenu">
 <div data-dojo-type="dijit.MenuItem"
+	data-dojo-props="onClick:function(){alert('file 1');}">New Group</div>
+<div data-dojo-type="dijit.MenuItem"
 	data-dojo-props="onClick:function(){alert('file 1');}">Change Group</div>
 <div data-dojo-type="dijit.MenuItem"
 	data-dojo-props="onClick:function(){alert('file 2');}">Delete Group</div>
