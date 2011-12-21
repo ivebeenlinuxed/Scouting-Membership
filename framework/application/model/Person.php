@@ -14,4 +14,8 @@ class Person extends DBObject {
 		
 		PersonAchievement::Award($this, $a, $user, $date, $value, $comment);
 	}
+	
+	public function getEmergencyContacts() {
+		return EmergencyContact::getByPerson($this);
+	}
 }

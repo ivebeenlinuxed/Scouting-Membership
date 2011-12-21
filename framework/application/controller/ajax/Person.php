@@ -26,8 +26,13 @@ class Person {
 		
 		$p = new \Model\Person($person);
 		$p->awardAchievement(new Achievement($achievement), $_SESSION['user_id'], $date, $value, $comment);
-		
-		
-		
+	}
+	
+	public function addEmConDlg() {
+		\Core\Router::loadView("ajax/em_con_dlg");
+	}
+	
+	public function addEmCon() {
+		\Model\EmergencyContact::Create($_POST);
 	}
 }

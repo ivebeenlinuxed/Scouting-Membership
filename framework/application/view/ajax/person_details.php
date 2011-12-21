@@ -1,5 +1,5 @@
 <input type="hidden" name="" id="member_id"
-	value="<?php echo $person->id ?>" />
+	value="<?php echo $id ?>" />
 <table>
 	<tr>
 		<td><img
@@ -104,7 +104,7 @@
 	</tr>
 </table>
 <div dojoType="dijit.layout.TabContainer" id="personDetailsTab"
-	style="height: 200px;">
+	style="height: 300px;">
 <div dojoType="dijit.layout.ContentPane" title="Achievements"
 	id="personAchievementTab" selected="true">
 <div class="person_achievement_actions">
@@ -128,38 +128,29 @@
 		</tr>
 	</thead>
 </table>
-<script type="dojo/method">
-
-</script>
-</div>
-</div>
-<div dojoType="dijit.layout.ContentPane" title="Groups"
-	id="personGroupTab">
-	<table dojoType="dojox.grid.DataGrid" jsId="membersGroups" style="height: 150px; width: 100%;">
-		 
-		<thead>
-			<tr>
-				<th field="fieldName" width="300px">Group Name</th>
-				<th field="fieldName" width="auto">Position</th>
-			</tr>
-		</thead>
-	</table>
-	</div>
-	<div dojoType="dijit.layout.ContentPane" title="Events"
-	id="personEventsTab">
-	</div>
+</div></div>
 <div dojoType="dijit.layout.ContentPane" title="Emergency Contact"
 	id="personEmergencyTab">
-	<table dojoType="dojox.grid.DataGrid" jsId="membersEmergency" style="height: 150px; width: 100%;">
+	<div class="person_emcontact_actions">
+		<button dojoType="dijit.form.Button"><script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">
+        Member.removeEmergencyContact();
+    </script>Remove Contact</button>
+		<button dojoType="dijit.form.Button">
+			<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">
+        Member.addEmergencyContactDialog();
+    </script>Add Contact</button>
+		</div>
+
+
+	<table dojoType="dojox.grid.DataGrid" selectionMode="single" jsId="membersEmergency" style="height: 150px;">
 		 
 		<thead>
 			<tr>
-				<th field="fieldName" width="300px">Name</th>
-				<th field="fieldName" width="110px">Home Phone</th>
-				<th field="fieldName" width="110px">Mobile Phone</th>
-				<th field="fieldName" width="500px">Address</th>
-				<th field="fieldName" width="100px">Date</th>
-				<th field="fieldName" width="auto">Comment</th>
+				<th field="full_name" width="200px">Name</th>
+				<th field="telephone" width="100px">Home Phone</th>
+				<th field="mobile_telephone" width="100px">Mobile Phone</th>
+				<th field="full_address" width="300px">Address</th>
+				<th field="email" width="200px">Email</th>
 			</tr>
 		</thead>
 	</table>

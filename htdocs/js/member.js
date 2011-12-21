@@ -49,6 +49,10 @@ Member.loadMain = function(id) {
 		target : "/API/members/"+id+"/achievements",
 		idAttribute : "id"
 	});
+	Member.memberEmConStore = new dojox.data.JsonRestStore( {
+		target : "/API/members/"+id+"/emergency_contact",
+		idAttribute : "id"
+	});
 	Member.activeMember = id;
 	$.ajax( {
 		url : "/ajax/person/details/" + id,
@@ -56,6 +60,7 @@ Member.loadMain = function(id) {
 			ajaxDigitPanel("membersMain", data);
 			
 			membersAchievements.setStore(Member.memberAchievementStore);
+			membersEmergency.setStore(Member.memberEmConStore);
 		}
 	});
 };
@@ -138,6 +143,7 @@ Member.addAchievementDialog = function() {
 	});
 };
 
+
 Member.addAchievement = function() {
 	$.ajax( {
 		url : "/ajax/person/addAchievement",
@@ -150,10 +156,50 @@ Member.addAchievement = function() {
 	});
 };
 
-Member.removeAchievement = function() {
-	selection = membersAchievements.selection.getSelected();
-	if (selection.length > 0) {
-		Member.memberAchievementStore.deleteItem(selection[0]);
-	}
-	Member.memberAchievementStore.save();
+
+
+
+Member.addEmergencyContactDialog = function() {
+	$.ajax( {
+		url : "/ajax/person/addEmConDlg",
+		success: function(data) {
+			if (Member.emConDlg != null) {
+				Member.emConDlg.destroyDescendants();
+				Member.emConDlg.destroy();
+			}
+			Member.emConDlg = new dijit.Dialog({
+		         title: "Add Emergency Contact",
+		         style: "width: 800px"
+		     });
+			
+			Member.emConDlg.attr("content", data);
+			Member.emConDlg.show();
+			Member.emConDlg.intermediateChanges = true;
+		}
+	});
 };
+
+Member.addEmergencyContact = function() {
+	var em_con = "";
+	$("*[id^=em_con]").each(function (index, node) {
+		em_con += "&"+node.id.substr(7)+"="+encodeURIComponent(node.value);
+	});
+	$.ajax( {
+		url : "/ajax/person/addEmCon",
+		type: "POST",
+		data: "person="+encodeURIComponent(Member.activeMember)+em_con,
+		success: function(data) {
+			Member.emConDlg.hide();
+			Member.memberEmConStore.revert();
+		}
+	});
+};
+
+Member.removeEmergencyContact = function() {
+	selection = membersEmergency.selection.getSelected();
+	if (selection.length > 0) {
+		Member.memberEmConStore.deleteItem(selection[0]);
+	}
+	Member.memberEmConStore.save();
+};
+
