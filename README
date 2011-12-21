@@ -1,1 +1,12 @@
-Please not that this project is unfinished
+Please not that this project is unfinished. - However we are looking for coders interested in scouting. PHP and MySQL skills useful.
+
+This project is being designed to take over the outdated Microsoft Access system which scouting units have been using to keep membership records up-to-date. Unfortunately however, this is not being updated and the developer was not interested in releasing the source code, making it unusable.
+
+This project aims to build a new membership system, able to be run alongside your website. It utilises the Boiler framework (also open source) to create a powerful web based system.
+
+Not only does this follow the trend of technology ("cloud computing"), but also addresses the issue where the group administrator is not the same as the main leader. In the past databases would have had to be sent to each other, creating possible collisions if multiple copies of the database were updated independantly, then merged.
+
+If you need any information, wish to donate or help please email me.
+
+Will Tinsdeall
+Lichfield District Explorer Scout Leader
